@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>랜덤 리듬 연습기</title>
+  <meta name="description" content="16가지 한 박 리듬 중 8개를 랜덤으로 뽑아 BPM에 맞춰 사운드폰트로 들려주는 리듬 연습기">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥁</text></svg>">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <h1>랜덤 리듬 연습기</h1>
+    <p class="sub">16가지 리듬 중 8개를 뽑아 2마디로 연습하세요</p>
+  </header>
+
+  <main>
+    <section id="grid" class="grid" aria-label="뽑힌 리듬 8개"></section>
+
+    <section class="bar">
+      <button id="drawBtn" class="btn primary" type="button">랜덤 뽑기</button>
+      <button id="playBtn" class="btn play" type="button">▶ 재생</button>
+      <div class="bpm">
+        <button type="button" class="step" data-bpm="-5">−5</button>
+        <button type="button" class="step" data-bpm="-1">−1</button>
+        <label class="bpm-val">
+          <input id="bpmNum" type="number" min="30" max="240" inputmode="numeric">
+          <span>BPM</span>
+        </label>
+        <button type="button" class="step" data-bpm="1">+1</button>
+        <button type="button" class="step" data-bpm="5">+5</button>
+      </div>
+    </section>
+    <input id="bpmRange" class="bpm-range" type="range" min="30" max="240" aria-label="BPM">
+    <p id="status" class="status" aria-live="polite">&nbsp;</p>
+
+    <section class="options">
+      <label class="field">
+        <span>리듬 소리 (사운드폰트)</span>
+        <select id="instrument">
+          <option value="woodblock">우드블록</option>
+          <option value="acoustic_grand_piano">피아노</option>
+          <option value="marimba">마림바</option>
+          <option value="taiko_drum">타이코 드럼</option>
+          <option value="melodic_tom">멜로딕 톰</option>
+          <option value="synth_drum">신스 드럼</option>
+          <option value="agogo">아고고</option>
+          <option value="steel_drums">스틸 드럼</option>
+          <option value="synth">합성음 (샘플 없이)</option>
+        </select>
+      </label>
+      <label class="field">
+        <span>리듬 볼륨</span>
+        <input id="rhythmVol" type="range" min="0" max="1" step="0.05">
+      </label>
+      <label class="field">
+        <span>메트로놈 볼륨</span>
+        <input id="clickVol" type="range" min="0" max="1" step="0.05">
+      </label>
+      <div class="checks">
+        <label class="check"><input id="countIn" type="checkbox"> 1마디 카운트인</label>
+        <label class="check"><input id="loop" type="checkbox"> 반복 재생</label>
+        <label class="check"><input id="autoDraw" type="checkbox"> 반복마다 새로 뽑기</label>
+        <label class="check"><input id="showCount" type="checkbox"> 세는 법 표시</label>
+      </div>
+    </section>
+
+    <details class="pool">
+      <summary>뽑기 대상 리듬 고르기 <span id="poolCount"></span></summary>
+      <p class="hint">누른 리듬만 뽑힙니다. 8개보다 적게 고르면 중복으로 뽑아요.</p>
+      <div id="poolGrid" class="pool-grid"></div>
+      <div class="pool-actions">
+        <button id="poolAll" type="button" class="btn ghost">전체 선택</button>
+        <button id="poolNone" type="button" class="btn ghost">전체 해제</button>
+      </div>
+    </details>
+  </main>
+
+  <footer class="foot">
+    <kbd>Space</kbd> 랜덤 뽑기 · <kbd>Enter</kbd> 재생/정지 · <kbd>↑</kbd><kbd>↓</kbd> BPM (Shift ±5)
+    <br>리듬 소리: FluidR3 GM 사운드폰트 샘플
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
